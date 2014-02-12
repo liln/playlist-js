@@ -1,7 +1,12 @@
 // Track object
 function Track( title, artist ) {
-  this.title = title;
-  this.artist = artist;
+  if(title === "" || artist === "") {
+    throw "No title or artist";
+  }
+  else {
+    this.title = title;
+    this.artist = artist;
+  }
 }
 
 Track.prototype.toString = function () {
@@ -50,6 +55,15 @@ var musicPlaylist = (function () {
 musicPlaylist.addTrack(new Track("Fur Elise","Beethoven"));
 musicPlaylist.addTrack(new Track("Radioactive","Imagine Dragons"));
 musicPlaylist.addTrack(new Track("Creep","Radiohead"));
+
+// try to add empty track
+try {
+  var t = new Track("","");
+  musicPlaylist.addTrack(t);
+}
+catch(e) {
+  console.log(e);
+}
 
 console.log("Number of Tracks: ")
 console.log(musicPlaylist.getTrackCount());
